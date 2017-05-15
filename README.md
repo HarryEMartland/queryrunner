@@ -1,4 +1,4 @@
-#Query Runner
+# Query Runner
 
 This is a framework for running investigative queries.
 This can be used as a first line support tool for figuring out business configuration.
