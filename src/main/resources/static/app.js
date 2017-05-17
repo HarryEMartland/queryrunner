@@ -9,18 +9,28 @@ $(function () {
     var queries = [];
     var argumentList = [];
 
-    $.get('/query', function (data) {
-        $(data).each(function (i, element) {
-            var query = new Query(element.name, element.displayName, element.dependencies);
-            queries.push(query);
+    var qeuryPromise = $.get('/query')
+        .then(function (data) {
+            $(data).each(function (i, element) {
+                var query = new Query(element.name, element.displayName, element.dependencies);
+                queries.push(query);
+            });
+            return queries;
         });
-    });
 
-    $.get('/argument', function (data) {
-        $(data).each(function (i, element) {
-            var argument = new Argument(element.name, element.displayName, element.htmlElement);
-            argumentList.push(argument);
+    var argumentPromise = $.get('/argument')
+        .then(function (data) {
+            $(data).each(function (i, element) {
+                var argument = new Argument(element.name, element.displayName, element.htmlElement);
+                argumentList.push(argument);
+            });
+            return argumentList;
         });
+
+    $.when(qeuryPromise, argumentPromise).done(function () {
+        $(queries).each(function (i, query) {
+            query.argumentChanged(null, null, true)
+        })
     });
 
     function Query(name, displayName, dependencies) {
@@ -31,8 +41,8 @@ $(function () {
             .append(well);
         well.append(displayName).append(resultWrapper);
 
-        function argumentChanged(argument, value) {
-            if (dependencies.includes(argument)) {
+        function argumentChanged(argument, value, forceReload) {
+            if (dependencies.includes(argument) || forceReload) {
                 if (allDependenciesSet()) {
 
                     if (!addedToDom) {
@@ -71,7 +81,8 @@ $(function () {
 
         var This = this;
         this.name = name;
-        var input = $(htmlElement).val(getParameterByName(name));
+        this.value = getParameterByName(name);
+        var input = $(htmlElement).val(this.value);
         var inputGroup = $('' +
             '<div class="input-group">' +
             '<div class="input-group-addon">' + displayName + '</div>' +
@@ -81,7 +92,7 @@ $(function () {
 
         $('#argument-container').append(formGroup);
 
-        input.on('change', function (e) {
+        input.on('change', function () {
             This.value = input.val();
             history.pushState({}, null, updateQueryString(name, This.value));
             $(queries).each(function (i, query) {
