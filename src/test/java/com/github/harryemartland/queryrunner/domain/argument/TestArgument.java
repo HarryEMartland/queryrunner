@@ -22,4 +22,9 @@ public class TestArgument implements Argument<Integer> {
             }
         };
     }
+
+    @Override
+    public Integer getOrder() {
+        return 100;
+    }
 }

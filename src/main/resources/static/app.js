@@ -20,11 +20,13 @@ $(function () {
 
     var argumentPromise = $.get('/argument')
         .then(function (data) {
-            $(data).each(function (i, element) {
-                var argument = new Argument(element.name, element.displayName, element.htmlElement);
-                argumentList.push(argument);
+            data.sort(function (argumenta, argumentb) {
+                return argumenta.order - argumentb.order;
             });
-            return argumentList;
+            $(data).each(function (i, element) {
+                var argument = new Argument(element.name, element.displayName, element.htmlElement, element.order);
+                argumentList.push(argument);
+            })
         });
 
     $.when(qeuryPromise, argumentPromise).done(function () {
@@ -77,11 +79,12 @@ $(function () {
 
     }
 
-    function Argument(name, displayName, htmlElement) {
+    function Argument(name, displayName, htmlElement, order) {
 
         var This = this;
         this.name = name;
         this.value = getParameterByName(name);
+        this.order = order;
         var input = $(htmlElement).val(this.value);
         var inputGroup = $('' +
             '<div class="input-group">' +

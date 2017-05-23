@@ -145,5 +145,10 @@ public class QueryServiceImplTest {
         public ArgumentType<String> getType() {
             return new StringArgumentType();
         }
+
+        @Override
+        public Integer getOrder() {
+            return 100;
+        }
     }
 }

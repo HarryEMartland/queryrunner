@@ -8,4 +8,6 @@ public interface Argument<T> {
 
     ArgumentType<T> getType();
 
+    Integer getOrder();
+
 }

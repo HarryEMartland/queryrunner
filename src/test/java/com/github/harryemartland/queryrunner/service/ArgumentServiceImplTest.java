@@ -3,7 +3,6 @@ package com.github.harryemartland.queryrunner.service;
 import com.github.harryemartland.queryrunner.domain.argument.Argument;
 import com.github.harryemartland.queryrunner.domain.argument.ArgumentNotFoundException;
 import com.github.harryemartland.queryrunner.domain.argument.TestArgument;
-import com.github.harryemartland.queryrunner.domain.argument.type.ArgumentType;
 import com.github.harryemartland.queryrunner.domain.argument.type.IntegerArgumentType;
 import com.github.harryemartland.queryrunner.dto.ArgumentDTO;
 import java.util.Arrays;
@@ -40,8 +39,8 @@ public class ArgumentServiceImplTest {
     @Before
     public void setUp() {
         ReflectionTestUtils.setField(argumentService, "arguments", Arrays.asList(argument1, argument2, argument3));
-        Mockito.when(argument1.getType()).thenReturn((ArgumentType) new IntegerArgumentType());
-        Mockito.when(argument3.getType()).thenReturn((ArgumentType) new IntegerArgumentType());
+        Mockito.when(argument1.getType()).thenReturn(new IntegerArgumentType());
+        Mockito.when(argument3.getType()).thenReturn(new IntegerArgumentType());
     }
 
     @Test
@@ -58,6 +57,7 @@ public class ArgumentServiceImplTest {
         Assert.assertEquals(TestArgument.class.getCanonicalName(), secondArgument.getName());
         Assert.assertEquals("test name", secondArgument.getDisplayName());
         Assert.assertEquals("test html", secondArgument.getHtmlElement());
+        Assert.assertEquals((Integer) 100, secondArgument.getOrder());
     }
 
     @Test()

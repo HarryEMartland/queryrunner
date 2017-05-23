@@ -19,7 +19,7 @@ public class ArgumentServiceImpl implements ArgumentService {
         return arguments.stream()
                 .filter(argument -> argument.getClass().getCanonicalName().equalsIgnoreCase(name))
                 .findFirst()
-                .orElseThrow(()->new ArgumentNotFoundException(name));
+                .orElseThrow(() -> new ArgumentNotFoundException(name));
     }
 
     @Override
@@ -28,7 +28,11 @@ public class ArgumentServiceImpl implements ArgumentService {
     }
 
     private ArgumentDTO toDTO(Argument argument) {
-        return new ArgumentDTO(argument.getClass().getCanonicalName(), argument.getDisplayName(), argument.getType().htmlComponent());
+        return new ArgumentDTO(
+                argument.getClass().getCanonicalName(),
+                argument.getDisplayName(),
+                argument.getType().htmlComponent(),
+                argument.getOrder());
     }
 
 }
