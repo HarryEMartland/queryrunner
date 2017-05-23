@@ -32,7 +32,6 @@
                     <effort>Max</effort>
                     <threshold>Low</threshold>
                     <xmlOutput>true</xmlOutput>
-                    <htmlOutput>true</htmlOutput>
                 </configuration>
                 <executions>
                     <execution>
