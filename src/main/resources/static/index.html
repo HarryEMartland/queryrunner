@@ -10,18 +10,31 @@
         }
 
         @keyframes spin {
-            from { transform: scale(1) rotate(0deg); }
-            to { transform: scale(1) rotate(360deg); }
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
         }
 
         @-webkit-keyframes spin2 {
-            from { -webkit-transform: rotate(0deg); }
-            to { -webkit-transform: rotate(360deg); }
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
         }
+
         .footer {
             color: lightgrey;
             text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
+
         .footer a {
             color: lightblue;
         }
@@ -40,10 +53,13 @@
         <div class="" id="loading-queries"></div>
         <div class="" id="success-queries"></div>
     </div>
-    <footer class="footer">
-        <p>Powered by <a href="https://github.com/HarryEMartland/queryrunner" target="_blank">GitHub.com/HarryEMartland/QueryRunner</a></p>
-    </footer>
 </div>
+<footer class="footer">
+    <p>
+        Powered by <a href="https://github.com/HarryEMartland/queryrunner" target="_blank">GitHub.com/HarryEMartland/QueryRunner</a>
+    </p>
+</footer>
+
 </body>
 <script
         src="https://code.jquery.com/jquery-3.2.1.min.js"
