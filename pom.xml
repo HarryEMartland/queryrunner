@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Query Runner</name>
+    <description>A UI framework to run business logic queries</description>
+    <url>https://github.com/HarryEMartland/queryrunner</url>
+
     <groupId>com.github.harryemartland</groupId>
     <artifactId>queryrunner</artifactId>
     <version>1.3.1-SNAPSHOT</version>
