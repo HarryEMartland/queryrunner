@@ -25,6 +25,21 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Harry Martland</name>
+            <email>HarryEMartland@gmail.com</email>
+            <organization>Martland</organization>
+            <organizationUrl>http://github.com/HarryEMartland</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/HarryEMartland/queryrunner.git</connection>
+        <developerConnection>scm:git:ssh://github.com:HarryEMartland/queryrunner.git</developerConnection>
+        <url>http://github.com/HarryEMartland/queryrunner/tree/master</url>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
