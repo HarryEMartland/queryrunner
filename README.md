@@ -1,5 +1,8 @@
 # Query Runner
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.harryemartland/queryrunner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.harryemartland/queryrunner)
+[![Build Status](https://travis-ci.org/HarryEMartland/queryrunner.svg?branch=master)](https://travis-ci.org/HarryEMartland/queryrunner)
+
 This is a framework for running investigative queries.
 This can be used as a first line support tool for figuring out business configuration.
 
