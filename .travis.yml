@@ -4,4 +4,4 @@ cache:
   directories:
   - $HOME/.m2
 install: mvn dependency:resolve
-script: mvn verify
+script: mvn package
