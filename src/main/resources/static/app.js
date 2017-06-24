@@ -4,7 +4,7 @@ $(function () {
         contentType: "application/json; charset=utf-8"
     });
 
-    var loadingIcon = $('<span class="glyphicon glyphicon-refresh spinning" style="color:grey"></span>');
+    var loadingIcon = '<span class="glyphicon glyphicon-refresh spinning" style="color:grey"></span>';
 
     var queries = [];
     var argumentList = [];
@@ -51,7 +51,7 @@ $(function () {
                         wrapper.prependTo('#loading-queries');
                     }
 
-                    resultWrapper.empty().append(loadingIcon);
+                    resultWrapper.empty().html(loadingIcon);
                     return $.post('query/' + name, JSON.stringify(argumentList), function (data) {
                         resultWrapper.empty().append(data.displayValue);
                         wrapper.prependTo('#' + data.value + '-queries');
