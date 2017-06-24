@@ -57,6 +57,7 @@ public class ArgumentServiceImplTest {
         Assert.assertEquals(TestArgument.class.getCanonicalName(), secondArgument.getName());
         Assert.assertEquals("test name", secondArgument.getDisplayName());
         Assert.assertEquals("test html", secondArgument.getHtmlElement());
+        Assert.assertEquals("test default", secondArgument.getDefaultValue());
         Assert.assertEquals((Integer) 100, secondArgument.getOrder());
     }
 

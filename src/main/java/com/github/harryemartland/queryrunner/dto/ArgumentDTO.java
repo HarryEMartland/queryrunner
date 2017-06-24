@@ -6,12 +6,14 @@ public class ArgumentDTO {
     private String displayName;
     private String htmlElement;
     private Integer order;
+    private String defaultValue;
 
-    public ArgumentDTO(String name, String displayName, String htmlElement, Integer order) {
+    public ArgumentDTO(String name, String displayName, String htmlElement, Integer order, String defaultValue) {
         this.name = name;
         this.displayName = displayName;
         this.htmlElement = htmlElement;
         this.order = order;
+        this.defaultValue = defaultValue;
     }
 
     public String getName() {
@@ -28,5 +30,9 @@ public class ArgumentDTO {
 
     public Integer getOrder() {
         return order;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
     }
 }

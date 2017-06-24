@@ -24,7 +24,13 @@ $(function () {
                 return argumenta.order - argumentb.order;
             });
             $(data).each(function (i, element) {
-                var argument = new Argument(element.name, element.displayName, element.htmlElement, element.order);
+                var argument = new Argument(
+                    element.name,
+                    element.displayName,
+                    element.htmlElement,
+                    element.order,
+                    element.defaultValue);
+
                 argumentList.push(argument);
             })
         });
@@ -79,11 +85,14 @@ $(function () {
 
     }
 
-    function Argument(name, displayName, htmlElement, order) {
+    function Argument(name, displayName, htmlElement, order, defaultValue) {
 
         var This = this;
         this.name = name;
         this.value = getParameterByName(name);
+        if(this.value === "" || this.value === null){
+            this.value = defaultValue;
+        }
         this.order = order;
         var input = $(htmlElement).val(this.value);
         var inputGroup = $('' +

@@ -150,5 +150,10 @@ public class QueryServiceImplTest {
         public Integer getOrder() {
             return 100;
         }
+
+        @Override
+        public String getDefaultValue() {
+            return "default";
+        }
     }
 }

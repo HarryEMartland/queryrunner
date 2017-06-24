@@ -32,7 +32,8 @@ public class ArgumentServiceImpl implements ArgumentService {
                 argument.getClass().getCanonicalName(),
                 argument.getDisplayName(),
                 argument.getType().htmlComponent(),
-                argument.getOrder());
+                argument.getOrder(),
+                argument.getDefaultValue());
     }
 
 }

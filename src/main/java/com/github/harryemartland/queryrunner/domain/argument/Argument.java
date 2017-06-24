@@ -10,4 +10,6 @@ public interface Argument<T> {
 
     Integer getOrder();
 
+    String getDefaultValue();
+
 }
