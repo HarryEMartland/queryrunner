@@ -14,6 +14,11 @@ public class IndexController {
     @Value("${queryrunner.subtitle}")
     private String subtitle;
 
+    /** Index mapping.
+     *
+     * @param model injected modle to set properties on
+     * @return the name of the template to render
+     */
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("title", title);

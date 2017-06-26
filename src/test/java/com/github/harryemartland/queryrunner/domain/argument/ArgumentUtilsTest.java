@@ -1,7 +1,7 @@
 package com.github.harryemartland.queryrunner.domain.argument;
 
-import com.github.harryemartland.queryrunner.domain.argument.value.ArgumentValue;
 import com.github.harryemartland.queryrunner.domain.argument.type.ArgumentType;
+import com.github.harryemartland.queryrunner.domain.argument.value.ArgumentValue;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
@@ -31,7 +31,8 @@ public class ArgumentUtilsTest {
     @Test()
     public void shouldThrowArgumentNotFoundExceptionWhenArgumentDoesNotExist() {
         exception.expect(ArgumentNotFoundException.class);
-        exception.expectMessage("Could not find argument: " + TestArgument.class.getCanonicalName());
+        exception.expectMessage("Could not find argument: "
+                + TestArgument.class.getCanonicalName());
         List<ArgumentValue> arguments = Arrays.asList(
                 createArgumentValue(Mockito.mock(Argument.class)),
                 createArgumentValue(Mockito.mock(Argument.class))

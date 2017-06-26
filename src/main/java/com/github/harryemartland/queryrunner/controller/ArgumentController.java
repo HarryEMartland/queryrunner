@@ -16,7 +16,7 @@ public class ArgumentController {
     private ArgumentService argumentService;
 
     @GetMapping
-    public List<ArgumentDTO> arguments(){
+    public List<ArgumentDTO> arguments() {
         return argumentService.toDTOs();
     }
 

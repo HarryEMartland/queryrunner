@@ -1,14 +1,14 @@
 package com.github.harryemartland.queryrunner.service;
 
+import com.github.harryemartland.queryrunner.domain.argument.Argument;
 import com.github.harryemartland.queryrunner.domain.argument.type.ArgumentType;
 import com.github.harryemartland.queryrunner.domain.argument.type.StringArgumentType;
 import com.github.harryemartland.queryrunner.domain.argument.value.ArgumentValue;
 import com.github.harryemartland.queryrunner.domain.query.NullQueryResultException;
-import com.github.harryemartland.queryrunner.dto.ArgumentValueDTO;
-import com.github.harryemartland.queryrunner.domain.argument.Argument;
 import com.github.harryemartland.queryrunner.domain.query.Query;
 import com.github.harryemartland.queryrunner.domain.query.QueryNotFoundException;
 import com.github.harryemartland.queryrunner.domain.query.QueryResult;
+import com.github.harryemartland.queryrunner.dto.ArgumentValueDTO;
 import com.github.harryemartland.queryrunner.dto.QueryDTO;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,25 +51,33 @@ public class QueryServiceImplTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
+    /** Setup.
+     *
+     */
     @Before
     public void setUp() {
-        ReflectionTestUtils.setField(queryService, "queries", Arrays.asList(query1, query2, query3, query4));
+        ReflectionTestUtils.setField(queryService, "queries",
+                Arrays.asList(query1, query2, query3, query4));
         Mockito.when(query1.getResult(Mockito.anyList())).thenReturn(QueryResult.FAIL);
-        Mockito.when(argumentService.findArgument(Mockito.anyString())).thenReturn(pickUpDepotIdArgument);
+        Mockito.when(argumentService.findArgument(Mockito.anyString()))
+                .thenReturn(pickUpDepotIdArgument);
     }
 
     @Test
     public void shouldCallQueyMethodOnCorrectQuery() {
         List<ArgumentValueDTO> argumentValueDTOList = new ArrayList<>();
-        QueryResult result = queryService.requestQuery(argumentValueDTOList, TestQuery.class.getCanonicalName());
+        QueryResult result = queryService
+                .requestQuery(argumentValueDTOList, TestQuery.class.getCanonicalName());
         Assert.assertEquals(QueryResult.OK, result);
     }
 
     @Test
     public void shouldMapArguments() {
-        List<ArgumentValueDTO> argumentValueDTOList = Collections.singletonList(createArgumentValueDTO("testName", "testValue"));
+        List<ArgumentValueDTO> argumentValueDTOList =
+                Collections.singletonList(createArgumentValueDTO("testName", "testValue"));
         queryService.requestQuery(argumentValueDTOList, query1.getClass().getCanonicalName());
-        Mockito.verify(query1).getResult(Collections.singletonList(new ArgumentValue(pickUpDepotIdArgument, "testValue")));
+        Mockito.verify(query1).getResult(Collections
+                .singletonList(new ArgumentValue(pickUpDepotIdArgument, "testValue")));
     }
 
     @Test
@@ -78,8 +86,10 @@ public class QueryServiceImplTest {
         QueryDTO secondQuery = queryDTOS.get(1);
         Assert.assertEquals("query 1", secondQuery.getDisplayName());
         Assert.assertEquals(query2.getClass().getCanonicalName(), secondQuery.getName());
-        Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()), secondQuery.getOptionalDependencies());
-        Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()), secondQuery.getDependencies());
+        Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()),
+                secondQuery.getOptionalDependencies());
+        Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()),
+                secondQuery.getDependencies());
     }
 
     @Test()
@@ -95,14 +105,14 @@ public class QueryServiceImplTest {
         queryService.requestQuery(Collections.emptyList(), query4.getClass().getCanonicalName());
     }
 
-    private ArgumentValueDTO createArgumentValueDTO(String name, String value){
+    private ArgumentValueDTO createArgumentValueDTO(String name, String value) {
         ArgumentValueDTO mock = Mockito.mock(ArgumentValueDTO.class);
         Mockito.when(mock.getName()).thenReturn(name);
         Mockito.when(mock.getValue()).thenReturn(value);
         return mock;
     }
 
-    private class NullResultQuery implements Query{
+    private class NullResultQuery implements Query {
         @Override
         public List<? extends Argument> getDependencies() {
             return Collections.singletonList(new TestArgument());
@@ -124,7 +134,7 @@ public class QueryServiceImplTest {
         }
     }
 
-    private class TestQuery implements Query{
+    private class TestQuery implements Query {
         @Override
         public List<? extends Argument> getDependencies() {
             return Collections.singletonList(new TestArgument());
@@ -146,7 +156,7 @@ public class QueryServiceImplTest {
         }
     }
 
-    private class TestArgument implements Argument<String>{
+    private class TestArgument implements Argument<String> {
         @Override
         public String getDisplayName() {
             return "test argument";

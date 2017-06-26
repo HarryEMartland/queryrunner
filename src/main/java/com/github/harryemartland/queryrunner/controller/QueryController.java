@@ -21,12 +21,13 @@ public class QueryController {
     private QueryService queryService;
 
     @GetMapping
-    public List<QueryDTO> getQuerys(){
+    public List<QueryDTO> getQuerys() {
         return queryService.toDTOs();
     }
 
     @PostMapping("/{query:.+}")
-    public QueryResult requestQuery(@RequestBody List<ArgumentValueDTO> arguments, @PathVariable("query") String query){
+    public QueryResult requestQuery(@RequestBody List<ArgumentValueDTO> arguments,
+                                    @PathVariable("query") String query) {
         return queryService.requestQuery(arguments, query);
     }
 }

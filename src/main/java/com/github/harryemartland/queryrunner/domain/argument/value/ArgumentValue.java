@@ -14,7 +14,7 @@ public class ArgumentValue<T> {
         this.argumentValue = argumentValue;
     }
 
-    public <T> ArgumentType<T> getArgumentType(){
+    public <T> ArgumentType<T> getArgumentType() {
         return argument.getType();
     }
 
@@ -28,13 +28,20 @@ public class ArgumentValue<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ArgumentValue<?> that = (ArgumentValue<?>) o;
 
-        if (argument != null ? !argument.equals(that.argument) : that.argument != null) return false;
-        return argumentValue != null ? argumentValue.equals(that.argumentValue) : that.argumentValue == null;
+        if (argument != null ? !argument.equals(that.argument) : that.argument != null) {
+            return false;
+        }
+        return argumentValue != null
+                ? argumentValue.equals(that.argumentValue) : that.argumentValue == null;
     }
 
     @Override
@@ -46,9 +53,9 @@ public class ArgumentValue<T> {
 
     @Override
     public String toString() {
-        return "ArgumentValue{" +
-                "argument=" + argument +
-                ", argumentValue='" + argumentValue + '\'' +
-                '}';
+        return "ArgumentValue{"
+                + "argument=" + argument
+                + ", argumentValue='" + argumentValue + '\''
+                + '}';
     }
 }

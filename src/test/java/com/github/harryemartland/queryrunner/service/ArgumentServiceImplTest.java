@@ -36,16 +36,21 @@ public class ArgumentServiceImplTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
+    /** Setup.
+     *
+     */
     @Before
     public void setUp() {
-        ReflectionTestUtils.setField(argumentService, "arguments", Arrays.asList(argument1, argument2, argument3));
+        ReflectionTestUtils.setField(argumentService, "arguments",
+                Arrays.asList(argument1, argument2, argument3));
         Mockito.when(argument1.getType()).thenReturn(new IntegerArgumentType());
         Mockito.when(argument3.getType()).thenReturn(new IntegerArgumentType());
     }
 
     @Test
     public void shouldFindArgument() {
-        Argument foundArgument = argumentService.findArgument(argument2.getClass().getCanonicalName());
+        Argument foundArgument = argumentService
+                .findArgument(argument2.getClass().getCanonicalName());
 
         Assert.assertEquals(argument2, foundArgument);
     }

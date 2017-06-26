@@ -24,11 +24,12 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public QueryResult requestQuery(List<ArgumentValueDTO> arguments, String queryName) {
-         Query query = queries.stream().filter(query1 -> query1.getClass().getCanonicalName().equalsIgnoreCase(queryName))
-                .findFirst().orElseThrow(()->new QueryNotFoundException(queryName));
+        Query query = queries.stream()
+                .filter(query1 -> query1.getClass().getCanonicalName().equalsIgnoreCase(queryName))
+                .findFirst().orElseThrow(() -> new QueryNotFoundException(queryName));
 
         QueryResult result = query.getResult(convertArguments(arguments));
-        if (result == null){
+        if (result == null) {
             throw new NullQueryResultException();
         }
         return result;
@@ -50,8 +51,10 @@ public class QueryServiceImpl implements QueryService {
         );
     }
 
-    private List<String> mapDependenciesToNames(List<? extends Argument> dependencies){
-        return dependencies.stream().map(argument->argument.getClass().getCanonicalName()).collect(Collectors.toList());
+    private List<String> mapDependenciesToNames(List<? extends Argument> dependencies) {
+        return dependencies.stream()
+                .map(argument -> argument.getClass().getCanonicalName())
+                .collect(Collectors.toList());
     }
 
     private List<ArgumentValue> convertArguments(List<ArgumentValueDTO> arguments) {
@@ -59,7 +62,10 @@ public class QueryServiceImpl implements QueryService {
     }
 
     private ArgumentValue convertArgument(ArgumentValueDTO argumentValueDTO) {
-        return new ArgumentValue(argumentService.findArgument(argumentValueDTO.getName()), argumentValueDTO.getValue());
+        return new ArgumentValue(argumentService.findArgument(
+                argumentValueDTO.getName()),
+                argumentValueDTO.getValue()
+        );
     }
 
 }

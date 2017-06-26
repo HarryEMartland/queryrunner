@@ -10,7 +10,7 @@ public class TestArgument implements Argument<Integer> {
 
     @Override
     public ArgumentType getType() {
-        return new ArgumentType(){
+        return new ArgumentType() {
             @Override
             public Object convert(String string) {
                 return Integer.parseInt(string);
