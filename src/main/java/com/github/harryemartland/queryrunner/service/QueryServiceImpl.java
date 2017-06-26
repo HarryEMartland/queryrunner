@@ -1,5 +1,6 @@
 package com.github.harryemartland.queryrunner.service;
 
+import com.github.harryemartland.queryrunner.domain.argument.Argument;
 import com.github.harryemartland.queryrunner.domain.argument.value.ArgumentValue;
 import com.github.harryemartland.queryrunner.domain.query.NullQueryResultException;
 import com.github.harryemartland.queryrunner.domain.query.Query;
@@ -44,8 +45,13 @@ public class QueryServiceImpl implements QueryService {
         return new QueryDTO(
                 query.getClass().getCanonicalName(),
                 query.getDisplayName(),
-                query.getDependencies().stream().map(argument->argument.getClass().getCanonicalName()).collect(Collectors.toList())
+                mapDependenciesToNames(query.getDependencies()),
+                mapDependenciesToNames(query.getOptionalDependencies())
         );
+    }
+
+    private List<String> mapDependenciesToNames(List<? extends Argument> dependencies){
+        return dependencies.stream().map(argument->argument.getClass().getCanonicalName()).collect(Collectors.toList());
     }
 
     private List<ArgumentValue> convertArguments(List<ArgumentValueDTO> arguments) {

@@ -8,6 +8,8 @@ public interface Query {
 
     List<? extends Argument> getDependencies();
 
+    List<? extends Argument> getOptionalDependencies();
+
     QueryResult getResult(List<ArgumentValue> argumentValues);
 
     String getDisplayName();

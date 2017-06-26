@@ -78,6 +78,7 @@ public class QueryServiceImplTest {
         QueryDTO secondQuery = queryDTOS.get(1);
         Assert.assertEquals("query 1", secondQuery.getDisplayName());
         Assert.assertEquals(query2.getClass().getCanonicalName(), secondQuery.getName());
+        Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()), secondQuery.getOptionalDependencies());
         Assert.assertEquals(Collections.singletonList(TestArgument.class.getCanonicalName()), secondQuery.getDependencies());
     }
 
@@ -108,6 +109,11 @@ public class QueryServiceImplTest {
         }
 
         @Override
+        public List<? extends Argument> getOptionalDependencies() {
+            return Collections.singletonList(new TestArgument());
+        }
+
+        @Override
         public QueryResult getResult(List<ArgumentValue> argumentValues) {
             return null;
         }
@@ -121,6 +127,11 @@ public class QueryServiceImplTest {
     private class TestQuery implements Query{
         @Override
         public List<? extends Argument> getDependencies() {
+            return Collections.singletonList(new TestArgument());
+        }
+
+        @Override
+        public List<? extends Argument> getOptionalDependencies() {
             return Collections.singletonList(new TestArgument());
         }
 

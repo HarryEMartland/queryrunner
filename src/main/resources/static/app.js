@@ -12,7 +12,8 @@ $(function () {
     var qeuryPromise = $.get('/query')
         .then(function (data) {
             $(data).each(function (i, element) {
-                var query = new Query(element.name, element.displayName, element.dependencies);
+                var query = new Query(element.name, element.displayName,
+                    element.dependencies, element.optionalDependencies);
                 queries.push(query);
             });
             return queries;
@@ -41,7 +42,7 @@ $(function () {
         })
     });
 
-    function Query(name, displayName, dependencies) {
+    function Query(name, displayName, dependencies, optionalDependencies) {
         var addedToDom = false;
         var resultWrapper = $('<div class="pull-right"></div>');
         var well = $('<div class="well well-sm"></div>');
@@ -50,7 +51,7 @@ $(function () {
         well.append(displayName).append(resultWrapper);
 
         function argumentChanged(argument, value, forceReload) {
-            if (dependencies.includes(argument) || forceReload) {
+            if (dependencies.includes(argument) || forceReload || optionalDependencies.includes(argument)) {
                 if (allDependenciesSet()) {
 
                     if (!addedToDom) {
