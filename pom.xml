@@ -10,7 +10,7 @@
 
     <groupId>com.github.harryemartland</groupId>
     <artifactId>queryrunner</artifactId>
-    <version>1.4.1-SNAPSHOT</version>
+    <version>1.4.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
